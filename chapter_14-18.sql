@@ -89,11 +89,36 @@
 -- FROM products
 -- WHERE vend_id IN (1001, 1002);
 
-SELECT vend_id, prod_id, prod_price
-FROM products
-WHERE prod_price <= 5
-UNION ALL
-SELECT vend_id, prod_id, prod_price
-FROM products
-WHERE vend_id IN (1001, 1002)
-ORDER BY vend_id, prod_price;
+-- SELECT vend_id, prod_id, prod_price
+-- FROM products
+-- WHERE prod_price <= 5
+-- UNION ALL
+-- SELECT vend_id, prod_id, prod_price
+-- FROM products
+-- WHERE vend_id IN (1001, 1002)
+-- ORDER BY vend_id, prod_price;
+
+-- chapter 18
+
+-- SELECT note_text
+-- FROM productnotes
+-- WHERE Match(note_text) Against("rabbit");
+
+-- SELECT note_text, Match(note_text) Against("rabbit") AS rank_
+-- FROM productnotes;
+
+-- SELECT note_text
+-- FROM productnotes
+-- WHERE Match(note_text) Against("anvils");
+
+-- SELECT note_text
+-- FROM productnotes
+-- WHERE Match(note_text) Against("anvils" WITH QUERY EXPANSION);
+
+-- SELECT note_text
+-- FROM productnotes
+-- WHERE Match(note_text) Against("heavy" IN BOOLEAN MODE);
+
+SELECT note_text
+FROM productnotes
+WHERE Match(note_text) Against("heavy -rope*" IN BOOLEAN MODE);
